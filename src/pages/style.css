@@ -8,7 +8,7 @@
     }
 }
 
-
+/* 
 .Container-cards {
   position: relative;
   display: flex;
@@ -40,7 +40,7 @@
   height: 350px !important;
   transform: translate3d(0px, 0px, 100px) !important;
   z-index: 100 !important;
-}
+} */
 
 
 .deckofcards-container{
@@ -153,9 +153,11 @@
     align-items: center;
     min-height: 100vh;
     background-color: #f4f7fc;
+   
 }
 
 .login-box {
+    animation: op-forward-bt 0.5s ease forwards;
     background-color: #ffffff;
     border-radius: 12px;
     border: 1px solid #e0e2ec;
@@ -233,6 +235,11 @@
 }
 
 @media (max-width: 768px) {
+
+  .card {
+    width: 90px;
+    height: 150px;
+  }
     .login-box {
         max-width: 100%;
         padding: 15px;

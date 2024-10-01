@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { generateDeck } from "../assets/utils/util";
-import { startGame, updateScore } from "../Redux/slices/gameSlice";
+import { startGame } from "../Redux/slices/gameSlice";
 
 import WonGame from "./WonGame";
 import StartGame from "./StartGame";

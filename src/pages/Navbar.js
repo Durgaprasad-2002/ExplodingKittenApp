@@ -1,10 +1,11 @@
 import React, { memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/slices/userSlice";
 import "./style.css";
 
 function Navbar() {
+  const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -19,6 +20,7 @@ function Navbar() {
     dispatch(logout());
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    navigate("/");
     window.location.reload();
   };
 

@@ -8,12 +8,10 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PlayAgain from "./pages/PlayAgain";
 
 const GameHome = lazy(() => import("./pages/GameHome"));
 
 function App() {
-  function HandleGameStart(params) {}
   return (
     <>
       <BrowserRouter>

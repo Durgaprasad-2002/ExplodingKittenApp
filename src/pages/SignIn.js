@@ -48,8 +48,9 @@ export default function SignIn() {
         navigate("/");
       })
       .catch((err) => {
+        const errmsg = err.response.data.message || "An Error Occured!";
+        setMessage(() => errmsg);
         console.log(err);
-        setMessage("Login failed, please try again.");
       })
       .finally(() => {
         setDisable(false);
@@ -98,6 +99,11 @@ export default function SignIn() {
                   {" "}
                   Register
                 </Link>
+              </p>
+            </div>
+            <div className="form-container">
+              <p className="alternate-msg">
+                Already Logged In? <Link to="/game">Play Game</Link>
               </p>
             </div>
           </form>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   let navigate = useNavigate();
@@ -45,9 +46,12 @@ export default function SignUp() {
         ...formData,
       })
       .then((data) => {
+        alert("Account Created Successfully");
         navigate("/login");
       })
       .catch((err) => {
+        const errmsg = err.response.data.message || "An Error Occured!";
+        setMessage(() => errmsg);
         console.log(err);
       })
       .finally(() => {
@@ -111,6 +115,15 @@ export default function SignUp() {
               <button type="submit" className="submit-btn" disabled={disable}>
                 Sign Up
               </button>
+            </div>
+            <div className="form-container">
+              <p className="alternate-msg">
+                Already have an account?{"  "}
+                <Link to="/login" className="links">
+                  {" "}
+                  Login
+                </Link>
+              </p>
             </div>
           </form>
         </div>
