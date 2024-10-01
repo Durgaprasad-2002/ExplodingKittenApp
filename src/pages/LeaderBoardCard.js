@@ -8,7 +8,6 @@ function LeaderBoardCard({ rank, name, lastPlayed, totalScore }) {
         <span className="rank-number">#{rank}</span>{" "}
         <span className="name">{name}</span>
       </div>
-
       <div className="details">
         <strong>Total Score :</strong>{" "}
         {totalScore <= 0 ? (

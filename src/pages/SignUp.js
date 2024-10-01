@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   let navigate = useNavigate();
+
   let [message, setMessage] = useState("");
   let [disable, setdisable] = useState(false);
+
+  // ---------------- Form Hanlders and States ---------------
   let [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -28,13 +31,13 @@ export default function SignUp() {
     return true;
   }
 
+  // funtion to submit Form
   function HandleSubmit(e) {
     e.preventDefault();
     if (!VerifyPassord(formData.password)) {
       return;
     }
 
-    console.log(formData);
     setdisable(() => true);
 
     axios
@@ -42,9 +45,7 @@ export default function SignUp() {
         ...formData,
       })
       .then((data) => {
-        alert("Account is Registered");
         navigate("/login");
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);

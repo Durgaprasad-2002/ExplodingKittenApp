@@ -1,4 +1,3 @@
-// Navbar.js
 import React, { memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Outlet, useLocation } from "react-router-dom";
@@ -7,10 +6,11 @@ import "./style.css";
 
 function Navbar() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
   const [toggle, setToggle] = useState(false);
 
   const { isUserLogged, userData } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   const shownav =
     location.pathname !== "/signup" && location.pathname !== "/login";
@@ -18,7 +18,6 @@ function Navbar() {
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem("user");
-    localStorage.removeItem("userData");
     localStorage.removeItem("token");
     window.location.reload();
   };

@@ -22,7 +22,7 @@ function App() {
               path="game"
               element={
                 <Suspense fallback={<Loader />}>
-                  <GameHome />{" "}
+                  <GameHome />
                 </Suspense>
               }
             />

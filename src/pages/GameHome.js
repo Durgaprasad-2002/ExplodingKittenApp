@@ -15,6 +15,8 @@ export default function GameHome() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
+  // -----------------------Modal Triggers  ---------------------
+
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -23,6 +25,7 @@ export default function GameHome() {
     setShowModal(true);
   }
 
+  // ------------------------ Verifying User Logged ------------------
   const { isUserLogged, userData } = useSelector((state) => state.user);
   const gameId = useSelector((state) => state.game.Game.gameId);
 
@@ -31,6 +34,8 @@ export default function GameHome() {
       navigate("/login");
     }
   }, [isUserLogged, navigate]);
+
+  // --------------------------- Game Status States ----------------------------
 
   const [gameStarted, setGameStarted] = useState(() => {
     const status = JSON.parse(localStorage.getItem("gameStatus"));
@@ -46,6 +51,8 @@ export default function GameHome() {
     return JSON.parse(localStorage.getItem("winState")) || false;
   });
 
+  // ------------------------- Game Cards States -----------------------
+
   const [deckCards, setDeckCards] = useState(() => {
     const storedDeck = JSON.parse(localStorage.getItem("deckCards"));
     return storedDeck || generateDeck();
@@ -55,26 +62,7 @@ export default function GameHome() {
     return JSON.parse(localStorage.getItem("defuseCardCount")) || 0;
   });
 
-  useEffect(() => {
-    localStorage.setItem("gameEnded", gameCompleted);
-  }, [gameCompleted]);
-
-  useEffect(() => {
-    localStorage.setItem("gameStatus", gameStarted);
-  }, [gameStarted]);
-
-  useEffect(() => {
-    localStorage.setItem("winState", win);
-  }, [win]);
-
-  useEffect(() => {
-    localStorage.setItem("deckCards", JSON.stringify(deckCards));
-  }, [deckCards]);
-
-  useEffect(() => {
-    localStorage.setItem("defuseCardCount", defuseCardCount);
-  }, [defuseCardCount]);
-
+  // Handle the function based on the Drew Card
   function handleCardClick(card) {
     let isBombExploded = false;
 
@@ -128,8 +116,9 @@ export default function GameHome() {
     }
   }
 
+  // function to update game on server
   async function HandleGamePlay(status) {
-    setGameCompleted(true);
+    setGameCompleted(() => true);
     await axios
       .post("https://explodingkittenserver.onrender.com/game/updatescore/end", {
         action: status,
@@ -144,10 +133,12 @@ export default function GameHome() {
       });
   }
 
+  // funtion to remove Card
   function handleRemoveCard(id) {
     setDeckCards((prevDeck) => prevDeck.filter((card) => card.id !== id));
   }
 
+  // function to  handle flip state of  Card
   function handleFlip(id) {
     setDeckCards((prevDeck) =>
       prevDeck.map((card) =>
@@ -156,13 +147,14 @@ export default function GameHome() {
     );
   }
 
+  // Funtion to initilaze the game start
   async function HandleGameStart() {
     await axios
       .post("https://explodingkittenserver.onrender.com/game/start", {
         ...userData,
       })
       .then((data) => {
-        const { gameId, message } = data.data;
+        const { gameId } = data.data;
         dispatch(
           startGame({
             gameId: gameId,
@@ -177,6 +169,40 @@ export default function GameHome() {
         console.log(err);
       });
   }
+
+  // ------------------------ Updating LocalStorage of States -------------
+
+  useEffect(() => {
+    localStorage.setItem("gameEnded", gameCompleted);
+  }, [gameCompleted]);
+
+  useEffect(() => {
+    localStorage.setItem("gameStatus", gameStarted);
+  }, [gameStarted]);
+
+  useEffect(() => {
+    localStorage.setItem("winState", win);
+  }, [win]);
+
+  useEffect(() => {
+    localStorage.setItem("deckCards", JSON.stringify(deckCards));
+  }, [deckCards]);
+
+  useEffect(() => {
+    localStorage.setItem("defuseCardCount", defuseCardCount);
+  }, [defuseCardCount]);
+
+  useEffect(() => {
+    return () => {
+      if (gameCompleted) {
+        localStorage.removeItem("gameStatus");
+        localStorage.removeItem("winState");
+        localStorage.removeItem("gameEnded");
+        localStorage.removeItem("deckCards");
+        localStorage.removeItem("defuseCardCount");
+      }
+    };
+  }, [gameCompleted]);
 
   return (
     <>

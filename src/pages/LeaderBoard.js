@@ -26,7 +26,7 @@ export default function LeaderBoard() {
     }
 
     fetchData();
-  }, []); // Empty dependency array ensures the effect runs only once when the component mounts.
+  }, []);
 
   if (loading) return <Loader />;
   if (error) return <div>Error: {error}</div>;

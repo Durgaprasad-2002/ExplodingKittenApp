@@ -5,7 +5,7 @@ import "./style.css";
 function KittenCard({ img, id, type, HandleClick, flipped, handleFlip }) {
   const handleCardClick = () => {
     handleFlip(id);
-    setTimeout(() => HandleClick({ id, type }), 3000);
+    setTimeout(() => HandleClick({ id, type }), 2500);
   };
 
   return (

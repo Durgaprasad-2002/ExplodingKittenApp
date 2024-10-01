@@ -23,7 +23,7 @@ const userSlice = createSlice({
       state.isUserLogged = !!action.payload.token;
 
       // Save user data and token to local storage
-      localStorage.setItem("userData", JSON.stringify(state.userData));
+      localStorage.setItem("user", JSON.stringify(state.userData));
       localStorage.setItem("token", state.token);
     },
     logout(state) {
@@ -32,7 +32,7 @@ const userSlice = createSlice({
       state.isUserLogged = false;
 
       // Clear user data and token from local storage
-      localStorage.removeItem("userData");
+      localStorage.removeItem("user");
       localStorage.removeItem("token");
     },
   },
