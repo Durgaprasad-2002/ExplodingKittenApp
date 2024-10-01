@@ -37,7 +37,7 @@ function Navbar() {
             </Link>
 
             <button
-              className="toggle-btn"
+              className={`${toggle ? "nav-btn" : "toggle-btn"}`}
               onClick={() => setToggle(!toggle)}
               aria-label="Toggle Navigation"
             >
