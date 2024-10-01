@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { lazy, Suspense } from "react";
+
+import Loader from "./pages/Loader";
+import LeaderBoard from "./pages/LeaderBoard";
+import Home from "./pages/Home";
+import Navbar from "./pages/Navbar";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const GameHome = lazy(() => import("./pages/GameHome"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<Home />} />
+            <Route
+              path="game"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <GameHome />{" "}
+                </Suspense>
+              }
+            />
+            <Route path="leaderboard" element={<LeaderBoard />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="login" element={<SignIn />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
