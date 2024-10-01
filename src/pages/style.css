@@ -258,6 +258,7 @@
 
 .warning-msg{
     color: red;
+    
 }
 
 .Logout{
@@ -525,6 +526,7 @@
   
 
 .alternate-msg{
+     margin-top: 0px;
     text-align: center;
     color: black;
 }

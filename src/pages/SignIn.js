@@ -93,6 +93,7 @@ export default function SignIn() {
               </button>
             </div>
             <div className="form-container">
+              <br />
               <p className="alternate-msg">
                 Don't have an account?{"  "}
                 <Link to="/signup" className="links">
@@ -100,8 +101,6 @@ export default function SignIn() {
                   Register
                 </Link>
               </p>
-            </div>
-            <div className="form-container">
               <p className="alternate-msg">
                 Already Logged In? <Link to="/game">Play Game</Link>
               </p>

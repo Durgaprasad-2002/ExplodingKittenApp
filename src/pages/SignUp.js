@@ -117,6 +117,7 @@ export default function SignUp() {
               </button>
             </div>
             <div className="form-container">
+              <br />
               <p className="alternate-msg">
                 Already have an account?{"  "}
                 <Link to="/login" className="links">
