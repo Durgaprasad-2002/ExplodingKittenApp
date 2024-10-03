@@ -407,12 +407,51 @@
     text-decoration: none;
 }
 .home-body{
-    padding: 30px;
+  padding: 30px;
+  will-change: scroll-position;
+  transition: all 0.3s linear;
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
 }
 
 .brand-main-desc{
+    min-height: 82vh;
     text-align: center;
-    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.get-btn {
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: #24b4fb;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.get-btn:hover {
+  background: #0ca6f3;
+}
+
+.get-btn > svg {
+  width: 34px;
+  margin-left: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.get-btn:hover svg {
+  transform: translateX(5px);
+}
+
+.get-btn:active {
+  transform: scale(0.95);
 }
 
 .exp-cat-img{
@@ -428,12 +467,12 @@
     margin-top: 20px;
 }
 .swipe-icon{
-    animation: swipe 2s ease  infinite forwards;
+    animation: swipe 2s linear  infinite forwards;
 }
 
 @keyframes swipe {
     from{
-        transform: translateY(30px);
+        transform: translateY(25px);
     }
     to{
         transform: translateY(0px);
